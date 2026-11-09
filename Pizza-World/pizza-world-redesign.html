@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizza World — Order Pizza, Wings &amp; Deals Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A044;--red:#B52B32;--green:#356B45;--black:#171717;--white:#FFFFFF;--cream:#F5F1E8;
+--ink:#171717;--mute:#5d5a53;--line:#ddd5c3;--r:14px;
+--display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font:17px/1.55 var(--body);color:var(--ink);background:var(--cream)}
+img{max-width:100%;display:block}a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);line-height:.95;margin:0;letter-spacing:.01em;text-transform:uppercase}
+h2{font-size:clamp(2.2rem,5vw,3.6rem)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 24px;font-weight:700;text-decoration:none;min-height:46px;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.97)}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#9c2229}
+.btn-gold{background:var(--gold);color:var(--black)}.btn-gold:hover{background:#b98f36}
+.btn-line{background:transparent;border:2px solid currentColor}
+/* header */
+header{position:sticky;top:0;z-index:50;background:var(--black);color:#fff;border-bottom:3px solid var(--red)}
+.nav{display:flex;align-items:center;gap:20px;height:72px}
+.logo img{height:46px;width:auto}.logo b{display:none;font:800 1.6rem var(--display);text-transform:uppercase}
+nav{display:flex;gap:6px;margin-left:12px}
+nav a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.95rem}
+nav a:hover{background:#2a2a2a}
+.spacer{flex:1}
+.mode{display:flex;background:#2a2a2a;border-radius:999px;padding:3px}
+.mode button{background:none;border:0;color:#cfcac0;padding:8px 14px;border-radius:999px;font-weight:700;font-size:.9rem}
+.mode button[aria-pressed=true]{background:var(--gold);color:var(--black)}
+.cartbtn{position:relative;background:var(--red);color:#fff;border:0;border-radius:999px;padding:0 20px;height:46px;font-weight:700}
+.cartbtn span{background:var(--gold);color:var(--black);border-radius:999px;padding:1px 8px;margin-left:6px;font-size:.85rem}
+/* hero */
+.hero{position:relative;color:#fff;background:#111 center/cover;overflow:hidden}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#171717 8%,rgba(23,23,23,.55) 60%,rgba(23,23,23,.2))}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .9fr;gap:40px;align-items:center;padding-top:72px;padding-bottom:72px}
+.hero h1{font-size:clamp(3.6rem,10vw,8rem);font-weight:900}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p.lead{font-size:1.15rem;max-width:34ch;color:#e8e2d4;margin:18px 0 0}
+.starter{background:var(--cream);color:var(--ink);border-radius:var(--r);padding:26px;box-shadow:0 20px 50px rgba(0,0,0,.45);border-top:6px solid var(--gold)}
+.starter h2{font-size:2rem;margin-bottom:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.seg button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;font-weight:700}
+.seg button[aria-pressed=true]{border-color:var(--red);background:#fbeaea;color:var(--red)}
+.starter label{font-weight:700;font-size:.9rem;display:block;margin-bottom:6px}
+.starter input{width:100%;padding:13px 14px;border:2px solid var(--line);border-radius:12px;font:inherit;background:#fff;margin-bottom:14px}
+.starter .btn{width:100%}
+.promise{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 0;padding:0;list-style:none;font-size:.88rem;color:var(--mute)}
+.promise li:before{content:"✓ ";color:var(--green);font-weight:800}
+/* sections */
+section{padding:72px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.head p{margin:8px 0 0;color:var(--mute);max-width:52ch}
+/* crave */
+.crave{padding:56px 0 8px}
+.cgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.ctile{position:relative;aspect-ratio:1;border-radius:var(--r);overflow:hidden;border:0;padding:0;background:var(--black);color:#fff;text-align:left}
+.ctile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ctile:hover img{transform:scale(1.07)}
+.ctile:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,23,23,.9) 5%,transparent 55%)}
+.ctile b{position:absolute;left:14px;bottom:12px;z-index:2;font:800 1.6rem var(--display);text-transform:uppercase}
+.dimg{margin:-20px -20px 6px;width:calc(100% + 40px);max-width:none;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r) var(--r) 0 0}
+/* deals */
+.deals{background:var(--black);color:#fff}
+.deals .head p{color:#cfcac0}
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feat{grid-column:span 2;grid-row:span 2;background:var(--red);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.feat img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.dcard{background:#242424;border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;border:1px solid #333}
+.dcard h3{font-size:1.7rem}.dcard p,.feat p{margin:0;color:#cfcac0;font-size:.95rem}
+.feat .in{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.feat h3{font-size:2.6rem}.feat p{color:#fbe3e3}
+.tagline{font-weight:700;color:var(--gold);font-size:.85rem}
+.dcard .btn,.feat .btn{margin-top:auto}
+.feat .btn{background:#fff;color:var(--red)}
+.applied{background:var(--green)!important;color:#fff!important}
+/* favorites */
+.favs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fav{position:relative;border-radius:var(--r);overflow:hidden;background:var(--black);color:#fff;min-height:340px;display:flex;align-items:end}
+.fav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.fav:hover img{transform:scale(1.05)}
+.fav:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,23,23,.95) 25%,transparent 75%)}
+.fav div{position:relative;z-index:2;padding:20px}
+.fav h3{font-size:2rem}.fav p{margin:6px 0 12px;font-size:.93rem;color:#e8e2d4}
+.fav:nth-child(1){grid-column:span 2}
+/* menu */
+.tabs{position:sticky;top:75px;z-index:20;background:var(--cream);padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.tab{white-space:nowrap;border:2px solid var(--ink);background:transparent;border-radius:999px;padding:8px 18px;font-weight:700}
+.tab[aria-pressed=true]{background:var(--ink);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px;align-items:center}
+.chips span{font-size:.9rem;font-weight:700;color:var(--mute)}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-size:.9rem;font-weight:500}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.item{background:#fff;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.item .ph{aspect-ratio:4/3;background:linear-gradient(135deg,var(--gold),var(--red));object-fit:cover;width:100%}
+.item .b{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.item h3{font-size:1.5rem}.item p{margin:0;color:var(--mute);font-size:.92rem;flex:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.75rem;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--cream)}
+.tag.spicy{background:#f6d6d8;color:var(--red)}.tag.veg{background:#d9eadd;color:var(--green)}.tag.popular{background:#f2e4bd;color:#7a5c14}
+.item .btn{padding:10px 18px;min-height:42px;align-self:flex-start}
+.build{grid-column:1/-1;background:linear-gradient(90deg,rgba(53,107,69,.97) 45%,rgba(53,107,69,.5)),url(https://pizzaworldonline.com/media/foodtec-menu/create-your-own-pizza.webp) center/cover var(--green);color:#fff;border-radius:var(--r);padding:24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.build h3{font-size:2.2rem}.build p{margin:4px 0 0;color:#dcebe0;max-width:56ch}
+/* promises */
+.why{background:#fff}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.wgrid h3{font-size:1.9rem;color:var(--red);margin-bottom:8px}.wgrid p{margin:0;color:var(--mute)}
+/* locations */
+.loc{background:var(--green);color:#fff;text-align:center}
+.loc form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.loc input{padding:14px 18px;border-radius:999px;border:0;font:inherit;min-width:260px}
+.loc p{max-width:50ch;margin:12px auto 0;color:#dcebe0}
+footer{background:var(--black);color:#cfcac0;padding:48px 0 28px;font-size:.93rem}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+footer h4{color:#fff;font:800 1.3rem var(--display);text-transform:uppercase;margin:0 0 10px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}footer a{text-decoration:none}footer a:hover{color:var(--gold)}
+footer form{display:flex;gap:8px;margin-top:10px}footer input{flex:1;padding:11px 14px;border-radius:999px;border:0;font:inherit;min-width:0}
+.fine{margin-top:32px;padding-top:18px;border-top:1px solid #333;font-size:.82rem}
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--cream);z-index:100;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.3)}
+.drawer.open{transform:none}
+.dh{background:var(--black);color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.dh h2{font-size:2rem}.dh button{background:none;border:0;color:#fff;font-size:1.8rem;line-height:1}
+.db{flex:1;overflow:auto;padding:20px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
+.row button{background:none;border:0;color:var(--red);font-weight:700}
+.df{padding:20px;background:#fff;border-top:1px solid var(--line)}
+.note{font-size:.85rem;color:var(--mute);margin:0 0 12px}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;display:none}.scrim.on{display:block}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--black);color:#fff;padding:12px 22px;border-radius:999px;z-index:120;transition:transform .3s;font-weight:700;border:2px solid var(--gold)}
+.toast.on{transform:translate(-50%,0)}
+@media(max-width:900px){
+nav,.mode{display:none}.hero .wrap{grid-template-columns:1fr;padding-top:48px;padding-bottom:48px}
+.dgrid{grid-template-columns:1fr 1fr}.favs{grid-template-columns:1fr}.fav:nth-child(1){grid-column:auto}
+.wgrid,.fgrid{grid-template-columns:1fr}section{padding:52px 0}.tabs{top:75px}}
+@media(max-width:900px){.cgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.cgrid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:1fr}.feat{grid-column:auto}.logo img{height:40px}.cartbtn{padding:0 14px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.hero video{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#top" aria-label="Pizza World home"><img src="https://pizzaworldonline.com/brand/pizza-world-logo-header.png" alt="Pizza World Gourmet Pizzeria" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><b>Pizza World</b></a>
+<nav aria-label="Main"><a href="#menu">Menu</a><a href="#deals">Deals</a><a href="#favorites">Favorites</a><a href="#locations">Locations</a></nav>
+<div class="spacer"></div>
+<div class="mode" role="group" aria-label="Order type"><button data-mode="Delivery" aria-pressed="true">Delivery</button><button data-mode="Carryout" aria-pressed="false">Carryout</button></div>
+<button class="cartbtn" id="openCart" aria-label="Open your order">Your order<span id="count">0</span></button>
+</div></header>
+
+<main id="top">
+<div class="hero">
+<video autoplay muted loop playsinline poster="https://pizzaworldonline.com/media/optimized/pepperoni.webp"><source src="https://pizzaworldonline.com/media/pizza-world-supreme-hero.mp4" type="video/mp4"></video>
+<div class="wrap">
+<div><h1>Crave the <em>difference.</em></h1><p class="lead">Fresh dough, quality ingredients and your local Pizza World, a few taps from dinner.</p></div>
+<div class="starter">
+<h2>Start your order</h2>
+<div class="seg" role="group" aria-label="Order type"><button data-mode="Delivery" aria-pressed="true">Delivery</button><button data-mode="Carryout" aria-pressed="false">Carryout</button></div>
+<label for="zip">ZIP code or address</label>
+<input id="zip" inputmode="text" autocomplete="postal-code" placeholder="Enter ZIP to find your store">
+<a class="btn btn-red" href="#menu" id="startBtn">Find my store &amp; order</a>
+<ul class="promise"><li>Total shown before you pay</li><li>No account needed</li><li>No app required</li></ul>
+</div></div></div>
+
+<section class="crave"><div class="wrap">
+<div class="head" style="margin-bottom:20px"><div><h2>What are you craving?</h2></div></div>
+<div class="cgrid" id="cgrid"></div></div></section>
+
+<section class="deals" id="deals"><div class="wrap">
+<div class="head"><div><h2>Today’s deals</h2><p>Tap a deal and it’s added to your order. No codes to copy.</p></div></div>
+<div class="dgrid" id="dgrid"></div></div></section>
+
+<section id="favorites"><div class="wrap">
+<div class="head"><div><h2>Only at Pizza World</h2><p>Sweet heat, pickles, Doritos and Thai chili. The pies other chains don’t make.</p></div><a class="btn btn-line" href="#menu">See the full menu</a></div>
+<div class="favs" id="favs"></div></div></section>
+
+<section id="menu" style="padding-top:0"><div class="wrap">
+<div class="head" style="margin-bottom:12px"><div><h2>The menu</h2></div></div>
+<div class="tabs" id="tabs" role="group" aria-label="Menu categories"></div>
+<div class="chips" id="chips" role="group" aria-label="Filters"><span>Filter:</span></div>
+<div class="mgrid" id="mgrid"></div></div></section>
+
+<section class="why"><div class="wrap"><div class="wgrid">
+<div><h3>Fresh dough, quality ingredients</h3><p>Pizza, wings, pasta, subs and salads from your local Pizza World.</p></div>
+<div><h3>Order direct from your store</h3><p>Skip the middleman. Your total is shown before checkout, with no surprise fees.</p></div>
+<div><h3>Your pizza, your way</h3><p>Pick the size, crust, sauce, cheese and toppings. Veggie, spicy and popular picks are tagged.</p></div>
+</div></div></section>
+
+<section class="loc" id="locations"><div class="wrap">
+<h2>Find your Pizza World</h2><p>Each store is independently owned and operated, so deals and delivery areas vary by location.</p>
+<form action="https://pizzaworldonline.com/locations" target="_blank"><input aria-label="ZIP code" placeholder="ZIP code"><button class="btn btn-gold" type="submit">Find stores</button></form></div></section>
+</main>
+
+<footer><div class="wrap"><div class="fgrid">
+<div><h4>Get deals first</h4><p style="margin:0">Join the list for member-only offers. No spam, unsubscribe anytime.</p>
+<form id="signup"><input type="email" required aria-label="Email" placeholder="you@email.com"><button class="btn btn-gold" type="submit">Join</button></form></div>
+<div><h4>Explore</h4><ul><li><a href="#menu">Menu</a></li><li><a href="#deals">Deals</a></li><li><a href="#locations">Locations</a></li><li><a href="https://pizzaworldonline.com/nutritional-information">Nutritional information</a></li></ul></div>
+<div><h4>Company</h4><ul><li><a href="https://pizzaworldonline.com/about">About</a></li><li><a href="https://pizzaworldjobs.com">Careers</a></li></ul></div>
+</div><p class="fine">Valid at participating locations. All locations are independently owned and operated. Offers cannot be combined.</p></div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Your order" aria-hidden="true">
+<div class="dh"><h2>Your order</h2><button id="closeCart" aria-label="Close">×</button></div>
+<div class="db"><p class="note" id="summary"></p><div id="lines"></div></div>
+<div class="df"><p class="note">Your store confirms the final total, including any delivery fee, before you pay. You won’t need to create an account.</p>
+<a class="btn btn-red" style="width:100%" href="https://pizzaworldonline.com/menu" target="_blank" rel="noopener">Continue to checkout</a></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const B="https://pizzaworldonline.com/media/foodtec-menu/";
+const DEALS=[
+{t:"2 Medium Gourmet Pizzas",p:"$34.95",d:"Excludes Meat Grande and Appondonza.",c:"2med3495",img:"https://pizzaworldonline.com/media/coupons/two-gourmet-pizzas-34-95.png",f:1},
+{t:"XL 2-Topping Pizza",p:"$19",d:"One extra-large pizza, two toppings.",c:"xl2top19",img:"https://pizzaworldonline.com/media/coupons/xl-two-topping.jpg"},
+{t:"Large 1-Topping Pizza",p:"$11.95",d:"One large pizza, one topping.",c:"lg1195",img:"https://pizzaworldonline.com/media/coupons/large-one-topping.jpg"},
+{t:"Free Bread Stix",p:"Free",d:"With any large or extra-large pizza.",c:"freesticks",img:"https://pizzaworldonline.com/media/coupons/free-stix.jpg"},
+{t:"$2 Off XL Gourmet",p:"$2 off",d:"Any extra-large gourmet pizza.",c:"xlpizza2",img:"https://pizzaworldonline.com/media/coupons/two-off-xl-gourmet.jpg"},
+{t:"$2 Off Any Sub",p:"$2 off",d:"Any Pizza World sub.",c:"betterbread",img:"https://pizzaworldonline.com/media/coupons/two-off-any-sub.jpg"}];
+const ITEMS=[
+["Pizza","Spicy Thai","spicy-thai","Sweet red chili glaze, chicken, fresh basil and shredded carrots after baking.",["spicy","popular"]],
+["Pizza","Big Dill","big-dill","Ranch base loaded with mozzarella and dill pickles.",["popular"]],
+["Pizza","Baja Taco","baja-taco","Refried beans, taco meat, two cheeses, lettuce, tomatoes and Doritos after baking.",["popular"]],
+["Pizza","Jamaican Jerk","jamaican-jerk","Jerk chicken, red onions and pineapple on an oil glaze.",["spicy"]],
+["Pizza","Texas BarBQue","texas-barbque","Smoky BBQ chicken with red onion and cilantro.",[]],
+["Pizza","Buffalo Chicken","buffalo-chicken","Spicy buffalo chicken on ranch with mozzarella.",["spicy"]],
+["Pizza","Appondanza","appondanza","Our signature loaded pizza: a full lineup of meats and fresh vegetables.",["popular"]],
+["Pizza","Meat Grande","meat-grande","A meat lover’s pizza with seven premium meats.",[]],
+["Pizza","Grecian Gourmet","grecian-gourmet","Green peppers, black olives, spinach, tomatoes and feta.",["veg"]],
+["Pizza","Le Gardeaux","le-gardeaux","Mushrooms, onions, green peppers, olives and tomatoes.",["veg"]],
+["Pizza","Via Bianco","via-bianco","Oil glaze, mozzarella, provolone, swiss and fresh basil.",["veg"]],
+["Pizza","Ciao Bella","ciao-bella","Garlic, mozzarella, tomatoes and fresh basil on oil glaze or red sauce.",["veg"]],
+["Wings","Boneless Wings","boneless-wings","Crispy boneless chicken tossed in your choice of sauce.",["popular"]],
+["Wings","Bone-In Wings","traditional-bone-in-wings","Classic bone-in wings tossed in your choice of sauce.",[]],
+["Subs","Nashville Hot Chicken Sub","nashville-hot-chicken-sub","Crispy boneless wings in Nashville hot sauce with lettuce and tomato.",["spicy"]],
+["Subs","Philly Cheesesteak Sub","philly-cheesesteak-sub","Philly sauce, steak, red onion, green pepper and provolone.",["popular"]],
+["Subs","Meatball Sub","meatball-sub","Meatballs, provolone and warm pizza sauce.",[]],
+["Subs","Chicken Parmesan Sub","chicken-parmesan-sub","Chicken breast and mozzarella with hot pizza sauce and parmesan.",[]],
+["Pasta","Chicken Alfredo Penne","chicken-alfredo-penne","Penne in creamy Alfredo with grilled chicken and mozzarella.",["popular"]],
+["Pasta","Baked Penne","baked-penne","Penne in red sauce or Alfredo, topped with mozzarella.",["veg"]],
+["Pasta","Manicotti","manicotti","Ricotta-filled pasta with Alfredo, red sauce and mozzarella.",["veg"]],
+["Salads","Greek Salad","greek-salad","Romaine, fresh vegetables, black olives and feta.",["veg"]],
+["Salads","Caesar Salad","caesar-salad","Romaine, croutons, parmesan and Caesar dressing.",["veg"]],
+["Salads","Baja Taco Salad","baja-taco-salad","Romaine, taco meat, jalapenos, cheddar, Doritos and salsa.",["spicy"]],
+["Sides","Cheesy Stix and Sauce","cheesy-stix-and-sauce","Breadsticks loaded with mozzarella, with hot pizza sauce.",["veg","popular"]],
+["Sides","Toasted Ravioli","toasted-ravioli","Crispy baked ravioli with parmesan and hot pizza sauce.",["veg"]],
+["Sides","Garlic Cheese Bread","garlic-cheese-bread","Toasted bread with garlic butter and melted mozzarella.",["veg"]],
+["Desserts","Chocolate Chip Cookie","chocolate-chip-cookie","A large warm cookie pizza, cut into pieces.",["veg"]],
+["Desserts","Cinnamon Sticks","cinnamon-sticks","Cinnamon-coated bread sticks drizzled with sweet icing.",["veg"]],
+["Pizza","Americana","americana","Mustard glaze, mozzarella, bacon, cheddar and seasoned ground beef.",[]],
+["Pizza","Amore Roma","amore-roma","Pepperoni, Italian sausage, mushrooms and black olives on red sauce.",[]],
+["Pizza","Classic Supreme","classic-supreme","Italian sausage, pepperoni and fresh vegetables on red sauce.",["popular"]],
+["Pizza","Chicken Bacon Ranch","chicken-bacon-ranch","Grilled chicken and crispy bacon on a ranch base.",["popular"]],
+["Pizza","Chicken Alfredo","chicken-alfredo","Grilled chicken on creamy Alfredo with mozzarella.",[]],
+["Pizza","Ole Mexicana","ole-mexicana","Refried beans, taco beef, salsa, jalapenos, cheddar and fresh toppings.",["spicy"]],
+["Pizza","The Philadelphia","the-philadelphia","Steak, sauteed onions and peppers, mozzarella and Philly sauce.",[]],
+["Subs","Buffalo Chicken Sub","buffalo-chicken-sub","Buffalo chicken and provolone with lettuce, tomatoes and mayo.",["spicy"]],
+["Subs","Hot Italian Sub","hot-italian-sub","Ham, pepperoni, salami, Italian vinaigrette, banana peppers, red onion and provolone.",[]],
+["Subs","French Dip","french-dip","Roast beef and provolone served with au jus.",[]],
+["Subs","Spicy Thai Chicken Sub","spicy-thai-chicken-sub","Thai-seasoned chicken and provolone with lettuce and tomatoes.",["spicy"]],
+["Calzones","Chef’s Calzone","chefs-calzone","Ricotta, mozzarella, pepperoni and Italian sausage with pizza sauce.",["popular"]],
+["Calzones","Create Your Own Calzone","create-your-own-calzone","Ricotta, mozzarella, pizza sauce and your choice of toppings.",[]],
+["Sides","Bread Stix and Sauce","bread-stix-and-sauce","Warm breadsticks with garlic butter and parmesan, with hot pizza sauce.",["veg"]],
+["Sides","French Fries","french-fries","Crispy golden French fries.",["veg"]],
+["Desserts","Cinnamon Roll","cinnamon-roll","Fresh cinnamon roll made from pizza dough with icing.",["veg"]]];
+const CATS=["All","Pizza","Wings","Subs","Pasta","Salads","Calzones","Sides","Desserts"];
+const FAVS=["Spicy Thai","Big Dill","Baja Taco"];
+const S={mode:"Delivery",cat:"All",filters:new Set(),cart:[],coupon:null};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const img=(slug,alt)=>`<img class="ph" loading="lazy" src="${B}${slug}.webp" alt="${alt}" onerror="this.removeAttribute('src')">`;
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("on"),2200)}
+function setMode(m){S.mode=m;$$("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===m));renderCart()}
+$$("[data-mode]").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+function renderDeals(){$("#dgrid").innerHTML=DEALS.map((d,i)=>d.f?
+`<article class="feat"><img src="${d.img}" alt="${d.t} for ${d.p}"><div class="in"><span class="tagline">Featured deal</span><h3>${d.t} — ${d.p}</h3><p>${d.d} Valid at participating locations.</p><button class="btn" data-deal="${i}">Add this deal</button></div></article>`:
+`<article class="dcard"><img class="dimg" loading="lazy" src="${d.img}" alt="${d.t}" onerror="this.remove()"><span class="tagline">${d.p}</span><h3>${d.t}</h3><p>${d.d}</p><button class="btn btn-gold" data-deal="${i}">Add deal</button></article>`).join("");
+$$("[data-deal]").forEach(b=>b.onclick=()=>applyDeal(+b.dataset.deal))}
+function applyDeal(i){S.coupon=DEALS[i];renderCart();markDeals();toast(DEALS[i].t+" added to your order");openCart()}
+function markDeals(){$$("[data-deal]").forEach(b=>{const on=S.coupon&&DEALS[+b.dataset.deal]===S.coupon;b.classList.toggle("applied",!!on);b.textContent=on?"✓ Added":(b.closest(".feat")?"Add this deal":"Add deal")})}
+const CRAVE=[["Pizza","Pizza","optimized/pepperoni.webp"],["Wings","Wings","optimized/wings.webp"],["Pasta","Pasta","marketing-hub/chicken-alfredo-pasta.jpg"],["Subs","Subs","optimized/meatball-sub.webp"],["Salads","Salads","marketing-hub/greek-salad.jpg"],["Sides","Appetizers","optimized/breadsticks.webp"]];
+function renderCrave(){$("#cgrid").innerHTML=CRAVE.map(c=>`<button class="ctile" data-go="${c[0]}"><img loading="lazy" src="https://pizzaworldonline.com/media/${c[2]}" alt="${c[1]} from Pizza World" onerror="this.remove()"><b>${c[1]}</b></button>`).join("");
+$$("[data-go]").forEach(b=>b.onclick=()=>{S.cat=b.dataset.go;S.filters.clear();renderTabs();renderChips();renderMenu();$("#menu").scrollIntoView()})}
+function renderFavs(){$("#favs").innerHTML=FAVS.map(n=>{const it=ITEMS.find(x=>x[1]===n);return `<article class="fav"><img src="${B}${it[2]}.webp" alt="${n} pizza" loading="lazy" onerror="this.removeAttribute('src')"><div><h3>${n}</h3><p>${it[3]}</p><button class="btn btn-gold" data-add="${n}">Add to order</button></div></article>`}).join("");bindAdd()}
+function renderTabs(){$("#tabs").innerHTML=CATS.map(c=>`<button class="tab" aria-pressed="${c===S.cat}" data-cat="${c}">${c}</button>`).join("");
+$$("[data-cat]").forEach(b=>b.onclick=()=>{S.cat=b.dataset.cat;renderTabs();renderMenu()})}
+function renderChips(){const h=$("#chips");h.innerHTML="<span>Filter:</span>"+[["popular","Popular"],["spicy","Spicy"],["veg","Vegetarian"]].map(([k,l])=>`<button class="chip" aria-pressed="${S.filters.has(k)}" data-f="${k}">${l}</button>`).join("");
+$$("[data-f]").forEach(b=>b.onclick=()=>{const k=b.dataset.f;S.filters.has(k)?S.filters.delete(k):S.filters.add(k);renderChips();renderMenu()})}
+const L={spicy:"Spicy",veg:"Vegetarian",popular:"Popular"};
+function renderMenu(){const list=ITEMS.filter(i=>(S.cat==="All"||i[0]===S.cat)&&[...S.filters].every(f=>i[4].includes(f))).sort((a,b)=>CATS.indexOf(a[0])-CATS.indexOf(b[0]));
+const build=(S.cat==="All"||S.cat==="Pizza")&&!S.filters.size?`<div class="build"><div><h3>Build your own pizza</h3><p>Choose size (small to 24" Big World), crust, sauce, cheese and toppings like pepperoni, bacon, jalapenos, feta and fresh basil.</p></div><button class="btn btn-gold" data-add="Build Your Own Pizza">Start building</button></div>`:"";
+$("#mgrid").innerHTML=build+(list.map(i=>`<article class="item">${img(i[2],i[1])}<div class="b"><div class="tags">${i[4].map(t=>`<span class="tag ${t}">${L[t]}</span>`).join("")}</div><h3>${i[1]}</h3><p>${i[3]}</p><button class="btn btn-red" data-add="${i[1]}">Add to order</button></div></article>`).join("")||"<p>Nothing matches those filters yet. Try removing one.</p>");bindAdd()}
+function bindAdd(){$$("[data-add]").forEach(b=>b.onclick=()=>{S.cart.push(b.dataset.add);renderCart();toast(b.dataset.add+" added")})}
+function renderCart(){$("#count").textContent=S.cart.length;
+$("#summary").textContent=S.mode+(($("#zip").value||"").trim()?" · ZIP "+$("#zip").value.trim():"")+" · store confirmed at checkout";
+const rows=S.cart.map((n,i)=>`<div class="row"><span>${n}</span><button data-rm="${i}" aria-label="Remove ${n}">Remove</button></div>`).join("");
+const c=S.coupon?`<div class="row" style="color:var(--green);font-weight:700"><span>Deal: ${S.coupon.t} (${S.coupon.p})</span><button data-rmc>Remove</button></div>`:"";
+$("#lines").innerHTML=(rows||c)?rows+c:"<p>Your order is empty. Add a pizza or tap a deal to get started.</p>";
+$$("[data-rm]").forEach(b=>b.onclick=()=>{S.cart.splice(+b.dataset.rm,1);renderCart()});
+$$("[data-rmc]").forEach(b=>b.onclick=()=>{S.coupon=null;renderCart();markDeals()})}
+function openCart(){$("#drawer").classList.add("open");$("#scrim").classList.add("on");$("#drawer").setAttribute("aria-hidden","false")}
+function closeCart(){$("#drawer").classList.remove("open");$("#scrim").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true")}
+$("#openCart").onclick=openCart;$("#closeCart").onclick=closeCart;$("#scrim").onclick=closeCart;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCart()});
+$("#zip").addEventListener("input",renderCart);
+$("#signup").onsubmit=e=>{e.preventDefault();e.target.reset();toast("You’re on the list")};
+renderCrave();renderDeals();renderFavs();renderTabs();renderChips();renderMenu();renderCart();
+</script>
+</body>
+</html>
